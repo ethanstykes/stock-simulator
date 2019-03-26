@@ -1,0 +1,15 @@
+h1{
+    text-align:center;
+    color:black;
+    font-family: 'Avenir';
+    font-size:70px;
+}
+h2{
+    text-align:center;
+    font-family:'Avenir';
+    color:black;
+    font-size:21;
+}
+body{
+    background-color:white;
+}
