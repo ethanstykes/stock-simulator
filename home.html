@@ -1,0 +1,175 @@
+<html>
+    <body>
+        <link rel="stylesheet" type="text/css" href="css/h.css">
+            <div class="header">
+                <h1><link rel="stylesheet" type="text/css" href="http://localhost:3500/css">Stock Simulator</h1>
+                <h2><link rel="stylesheet" type="text/css" href="http://localhost:3500/css">Learn to Invest</h2>
+                <div data-align="center" data-disabled="false" data-margin="0" data-should-use-flex="true" data-width="200" data-height="53" style="left: 620px; position: absolute; top: 255px; height: 63px; min-height: 28px; width: 200px;">
+                    <button class="button getstarted">Get Started</button>
+                </div>
+            </div>
+            <div class="topnav">
+                <a class="active" href="#home">Home</a>
+                <a class="b" href="localhost:3500/signup">Sign Up</a>
+                <a class="c" href="#contact">Contact</a>
+                <a class="d" href="#about">About</a>
+            </div>
+            <div>
+                <br><br><br><h2>Portfolio</h2>
+                <table id="t00">
+                    <tr>
+                        <th>Stock</th>
+                        <th>Qty</th>
+                        <th>Purchase Price</th>
+                        <th>Current Price</th>
+                        <th>Total Value</th>
+                        <th>Total Gain/Loss</th>
+                    </tr>
+                </table>
+            </div>
+            <style>
+                button.a{
+                    height:30;
+                    width:100;
+                    background-color:black;
+                    margin: 4px 2px;
+                }
+            .getstarted{
+                height:53;
+                width:200;
+                background-color:#F16876;
+                color:white;
+                font-size:20px;
+            }
+            .getstarted:hover{
+                background-color:#273B7B;
+            }
+            .topnav a {
+                float: left;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+            
+            /* Change the color of links on hover */
+            .topnav a:hover {
+                background-color: blue;
+                color: black;
+            }
+            .topnav a.b:hover {
+                background-color: #88B8DA;
+                color: black;
+            }
+            .topnav a.c:hover {
+                background-color: #88B8DA;
+                color: black;
+            }
+            .topnav a.d:hover {
+                background-color: #88B8DA;
+                color: black;
+            }
+            .header{
+                background-image:url("http://localhost:3500/stockimage");
+                height:420;
+                /*border-radius: 20px;*/
+            }
+            
+            /* Add a color to the active/current link */
+            .topnav a.active {
+                background-color: #3289C7;
+                color: white;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+                background-color: #fff;
+            }
+            table#t01 th {
+                background-color: black;
+                color: white;
+            }
+            </style>
+            <script>
+                
+                // Find a <table> element with id="t00":
+                var table0 = document.getElementById("t00");
+                
+                xhttp0 = new XMLHttpRequest();
+                xhttp0.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        stocks = JSON.parse(xhttp0.responseText)
+                        symbols = ["NKE","AAPL","KO","SBUX","WMT","NFLX","TSLA","DIS","FB","PG","AMZN","MCD"]
+                        console.log(stocks[symbols[0]])
+                        for(var i in symbols){
+                            var row = table0.insertRow(1);
+                            for(var j=0;j<6;j++){
+                                var cell1 = row.insertCell(j);
+                                cell1.innerHTML = stocks[symbols[i]][j];
+                            }
+                        }
+                    }
+                }
+            xhttp0.open("GET", "http://localhost:3500/portfolio", true);
+            xhttp0.send();
+            
+            // Find a <table> element with id="myTable":
+            var table = document.getElementById("t01");
+            
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    stocks = JSON.parse(xhttp.responseText)
+                    symbols = ["NKE","AAPL","KO","SBUX","WMT","NFLX","TSLA","DIS","FB","PG","AMZN","MCD"]
+                    console.log(stocks[symbols[0]])
+                    for(var i in symbols){
+                        var row = table.insertRow(1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5= row.insertCell(4);
+                        cell1.innerHTML = symbols[i]
+                        cell2.innerHTML = stocks[symbols[i]][0];
+                        cell3.innerHTML = stocks[symbols[i]][1];
+                        cell4.innerHTML = stocks[symbols[i]][2];
+                        cell5.innerHTML = stocks[symbols[i]][3];
+                    }
+                }
+            }
+            //xhttp.open("GET", "http://localhost:3500/stocks", true);
+            //xhttp.send();
+            function trade(){
+                var a = document.forms["myform"]["stock"].value;
+                var b = document.forms["myform"]["secret_key"].value;
+                var c = document.forms["myform"]["quantity"].value;
+                var formdata = a+"&"+b+"&"+c;
+                console.log(a,b,c)
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(xhttp.responseText == "finished"){
+                            alert("trade finished");
+                        }
+                    }
+                }
+                //xhttp.open("POST", "http://localhost:3500/trade", true);
+                //xhttp.send(formdata);
+                return false;
+            }
+            </script>
+            </body>
+</html>
