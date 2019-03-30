@@ -5,7 +5,6 @@ const getPrices = function(symbols, callback){
     i = 0
     function next() {
         const symbol = symbols[i++];
-        //console.log("1",symbol)
         if (!symbol) {
             return callback(null, prices);
         }
