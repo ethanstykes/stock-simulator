@@ -19,8 +19,6 @@ const getPrices = function(symbols, callback){
 
 const apiCall = function (prices, symbol, callback){
     
-    //console.log("2",symbol)
-    
     apikey = (Math.random()*9.223372e+18).toString(16)
     var options = { method: 'GET',
     url: 'https://www.alphavantage.co/query',
