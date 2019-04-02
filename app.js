@@ -38,7 +38,6 @@ const apiCall = function (prices, symbol, callback){
             for (key in keys){
             prices[symbol][key]=parseFloat(time_series[keys[key]]['4. close'])
             }
-            //console.log(prices)
             callback(null, prices);
             });
 }
