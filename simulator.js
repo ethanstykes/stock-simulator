@@ -402,7 +402,6 @@ app.get('/favicon', function (req, res) {
 });
 
 
-
 app.get('/stockimage', function (req, res) {
         res.sendFile(__dirname + '/images/stocks.jpg')
 });
